@@ -1,0 +1,17 @@
+Este es un programa en Python que implementa una aplicación de autenticación de contraseña de un solo uso (OTP) utilizando el algoritmo de hash basado en clave (HMAC) y el tiempo basado en OTP (TOTP). El programa utiliza la biblioteca PyOTP para generar el TOTP y la biblioteca Crypto para cifrar la clave maestra utilizada para generar el TOTP.
+
+El programa comienza importando las bibliotecas necesarias: hmac, hashlib, struct, time, argparse, os, Crypto.Cipher.AES, pyotp y base64.
+
+El programa define una función generate_totp que toma una clave y genera un TOTP utilizando HMAC y TOTP. La función toma un argumento key que es la clave secreta utilizada para generar el TOTP, y dos argumentos opcionales time_step y totp_length que establecen el intervalo de tiempo (en segundos) entre los OTP y la longitud del OTP generado, respectivamente. La función devuelve una cadena de texto que representa el TOTP generado.
+
+El programa define una función save_key que toma una clave maestra y la cifra utilizando AES. La función toma un argumento key que es la clave maestra que se va a cifrar. La función genera una clave de cifrado aleatoria y utiliza AES en modo EAX para cifrar la clave maestra.Luego, la función guarda la clave cifrada, el nonce y el tag en un archivo llamado ft_otp.key.
+
+El programa define una función load_key que carga la clave maestra cifrada desde el archivo ft_otp.key y la descifra utilizando AES. La función devuelve la clave maestra descifrada en formato de bytes.
+
+El programa utiliza la biblioteca argparse para definir dos subcomandos: g y k. El subcomando g se utiliza para generar una clave maestra y guardarla en un archivo, mientras que el subcomando k se utiliza para cargar una clave maestra desde un archivo y generar un TOTP.
+
+Si se utiliza el subcomando g, el programa verifica que la clave proporcionada tenga 64 caracteres hexadecimales y la guarda en el archivo ft_otp.key cifrada utilizando AES.
+
+Si se utiliza el subcomando k, el programa carga la clave maestra cifrada desde el archivo ft_otp.key y genera un TOTP utilizando la función generate_totp y la biblioteca PyOTP. El programa imprime el TOTP generado utilizando la función print.
+
+En resumen, este programa en Python implementa una aplicación de autenticación OTP utilizando HMAC y TOTP, y cifra la clave maestra utilizando AES para mayor seguridad. Elprograma puede ser ejecutado desde la línea de comandos utilizando los subcomandos g y k para generar una clave maestra y generar un TOTP, respectivamente. El programa utiliza las bibliotecas PyOTP y Crypto para generar y cifrar el TOTP y la clave maestra, respectivamente. Este programa puede ser utilizado como una forma adicional de autenticación para mejorar la seguridad de una aplicación o cuenta en línea que requiere autenticación de dos factores.

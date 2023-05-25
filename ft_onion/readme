@@ -1,0 +1,21 @@
+Este es un archivo Dockerfile que crea una imagen de Docker basada en la imagen oficial de Nginx. La imagen resultante contendrá un servidor Nginx que aloja un archivo index.html, y también tendrá un servidor SSH y un servidor Tor configurados.
+
+El archivo Dockerfile comienza obteniendo la última versión de la imagen oficial de Nginx utilizando el comando FROM nginx:latest. A continuación, copia el archivo index.html en el directorio de archivos estáticos de Nginx y el archivo nginx.conf en el directorio de configuración de Nginx.
+
+Luego, el archivo Dockerfile actualiza los paquetes del sistema y luego instala Tor y SSH server. También crea un usuario root y le asigna una contraseña. Luego, copia el archivo de configuración de Tor (torrc) en el directorio de configuración de Tor y el archivo de configuración de SSH (sshd_config) en el directorio de configuración de SSH.
+
+A continuación, se habilita el servicio SSH y se inicia Tor en segundo plano utilizando el comando systemctl enable ssh y tor -d. Finalmente, se exponen los puertos 80, 4242 y 9050 y se inicia Nginx, servicio Tor y servicio SSH utilizando el comando CMD.
+
+Este archivo Dockerfile crea una imagen de Docker que proporciona un servidor web Nginx concapacidad de alojar un sitio web estático, así como un servidor SSH y un servidor Tor para mayor seguridad y privacidad. Se pueden usar diferentes opciones de configuración para SSH y Tor según las necesidades.
+
+Para construir la imagen de Docker, se puede utilizar el comando docker build y especificar la ubicación del archivo Dockerfile. Por ejemplo, si el archivo Dockerfile se encuentra en el directorio actual, se puede utilizar el siguiente comando:
+
+
+docker build -t mi-imagen-nginx-ssh-tor .
+Esto construirá la imagen de Docker y la etiquetará como "mi-imagen-nginx-ssh-tor". El punto al final especifica que el archivo Dockerfile se encuentra en el directorio actual.
+
+Una vez que se ha construido la imagen, se puede utilizar el comando docker run para crear un contenedor a partir de la imagen:
+
+
+docker run -p 80:80 -p 4242:4242 -p 9050:9050 -d mi-imagen-nginx-ssh-tor
+Esto iniciará un nuevo contenedor con la imagen y expondrá los puertos 80, 4242 y 9050 al host. El contenedor se ejecutará en segundo plano (-d) y se puede acceder al servidor web Nginx a través del navegador web. También se puede acceder al servidor SSHy al servidor Tor a través de sus respectivos puertos.

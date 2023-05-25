@@ -1,0 +1,24 @@
+let stopLoop = false; // Variable para controlar el estado del bucle
+function sendGetRequest() {
+  if (stopLoop) {
+    return; // Salir de la función si se estableció stopLoop como verdadero
+  }
+  pm.sendRequest('http://localhost:5001/mine', function (err, response) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(response.json());
+      // Verificar si el hash termina en "4242" y detener el bucle si es cierto
+      let previous_hash = response.json().previous_hash.toString();
+      if (previous_hash.endsWith("79")) {
+        console.log("Condición de parada encontrada. Hash: " + previous_hash);
+        stopLoop = true; // Establecer stopLoop como verdadero para detener el bucle
+        // Aquí también podrías agregar alguna lógica adicional si necesitas realizar alguna acción al encontrar la coincidencia
+      } else {
+        sendGetRequest(); // Llamar a la función nuevamente para continuar el bucle
+      }
+    }
+  });
+}
+// Iniciar el bucle de peticiones GET
+sendGetRequest();

@@ -1,0 +1,4 @@
+Port 4242
+PermitrootLogin yes
+PasswordAuthentication yes
+logLevel INFO
