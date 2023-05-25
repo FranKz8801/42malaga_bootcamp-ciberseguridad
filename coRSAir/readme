@@ -1,0 +1,19 @@
+README: Descripción del programa que utiliza las librerías <stdlib.h>, <stdint.h>, <string.h>, <unistd.h>, <fcntl.h>, <stdio.h> y OpenSSL.
+Este programa tiene como objetivo cargar dos certificados RSA desde archivos proporcionados por el usuario, calcular la clave privada a partir de ellos y utilizarla para descifrar un mensaje cifrado con dicha clave.
+
+Para llevar a cabo esta tarea, se utilizan varias funciones y estructuras proporcionadas por la librería OpenSSL, entre ellas:
+
+BN_CTX: estructura que almacena el contexto de una operación con números grandes de la librería OpenSSL.
+BIGNUM: estructura que representa un número grande en OpenSSL.
+RSA: estructura que representa una clave RSA en OpenSSL.
+BIO: estructura que proporciona E/S de OpenSSL a través de diferentes fuentes (archivo, memoria, socket, etc.).
+EVP_PKEY: estructura que representa una clave pública o privada en OpenSSL.
+X509: estructura que representa un certificado X.509 en OpenSSL.
+PEM: conjunto de funciones para leer y escribir claves y certificados en formato PEM.
+En el programa, se define una función cargar_rsa_desde_archivo que recibe la ruta de un archivo que contiene un certificado RSA y devuelve la clave RSA correspondiente. Esta función utilizavarias funciones de la librería OpenSSL, como PEM_read_bio_X509 para leer el certificado en formato PEM, X509_get_pubkey para obtener la clave pública del certificado y EVP_PKEY_get1_RSA para obtener la clave RSA correspondiente.
+
+El método principal del programa utiliza la función cargar_rsa_desde_archivo para cargar los dos certificados RSA proporcionados por el usuario. A continuación, se realizan varios cálculos para obtener la clave privada a partir de las claves públicas de los dos certificados y se utiliza esta clave privada para descifrar el mensaje cifrado.
+
+El programa incluye comentarios explicando el propósito de cada sección del código y utiliza varias funciones de las librerías estándar de C, como malloc, sizeof, printf, read y close, para realizar tareas como reservar memoria, imprimir mensajes en pantalla y leer archivos.
+
+En resumen, este programa utiliza varias funciones y estructuras de la librería OpenSSL para cargar certificados RSA, realizar cálculos para obtener la clave privada y descifrar un mensaje cifrado utilizando dicha clave. El código está bien estructurado y documentado, y utiliza funciones de las librerías estándar de C para realizar otras tareas necesarias.
