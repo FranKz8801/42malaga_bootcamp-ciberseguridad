@@ -1,0 +1,35 @@
+FROM python:3.8
+# Instalar paquetes necesarios
+RUN apt-get update && apt-get install -y \
+    sudo
+    # python3\
+    # python3-pip
+RUN pip install psutil  
+RUN pip install watchdog 
+RUN pip install psutil
+# Crear usuario
+RUN useradd -m fruiz-do && \
+    echo "fruiz-do:password" | chpasswd
+RUN usermod -aG sudo fruiz-do
+# USER fruiz-do
+USER root
+COPY iron_dome.py /home/fruiz-do/irondome.py
+# COPY remove.py /home/fruiz-do/remove.py
+RUN mkdir /home/fruiz-do/prueba
+COPY prueba /home/fruiz-do/prueba
+RUN mkdir /var/log/irondome/
+RUN sudo chmod 700 /var/log/irondome/
+RUN sudo chmod 700 /home/fruiz-do/irondome.py
+# RUN sudo chmod 700 /home/fruiz-do/remove.py
+# RUN sudo chown fruiz-do /home/infection/
+# RUN sudo chown -R fruiz-do /home/infection/
+# COPY stockholm.py /home/fruiz-do/stockholm.py
+# COPY infection /home/fruiz-doinfection
+# EXPOSE 80
+# EXPOSE 4242
+# # Iniciar servicios con cmd o entrypoint
+# CMD service ssh start && nginx -g 'daemon off;' && tor
+# docker build -t iron .
+# docker run -it iron bash ./sgoinfre/shared/42toolbox/init_docker.sh
+
+

@@ -1,0 +1,54 @@
+Este script de Python es un programa de monitoreo de seguridad diseñado para monitorear una zona crítica y detectar cualquier actividad sospechosa. Usa varias funciones para verificar comportamientos anormales como el uso excesivo del disco, actividad criptográfica intensiva, cambios en la entropía de los archivos y extensiones de archivo.
+
+Dependencias:
+
+argparse
+logging
+os
+pwd
+signal
+sys
+time
+math
+psutil
+Uso:
+
+Para ejecutar el script, abra la terminal y navegue hasta el directorio donde se guarda el script.
+Escriba "python nombre_del_script.py ruta/a/la/zona_crítica -e extensiones" para ejecutar el script. La opción "-e" es opcional y se puede usar para especificar una lista de extensiones de archivo a monitorear.
+El script monitoreará continuamente la zona crítica hasta que el usuario lo detenga manualmente con Ctrl+C.
+Funciones:
+
+check_file_extensions(path, extensions)
+Esta función toma una ruta de archivo y una lista de extensiones de archivo como entrada y verifica si la extensión del archivo coincide con alguna de las extensiones de la lista.
+
+check_disk_usage()
+Esta función verifica el uso del disco y registra un mensaje de advertencia si el uso del disco está por encimadel 80%.
+
+check_crypto_activity()
+Esta función verifica la actividad criptográfica intensiva y registra un mensaje de advertencia si el uso de memoria de cualquier proceso raíz con "crypto" en su nombre está por encima de los 50 MB.
+
+check_entropy(path)
+Esta función calcula la entropía de un archivo y registra un mensaje de advertencia si la entropía está por debajo de 6.5.
+
+compute_entropy(data)
+Esta función calcula la entropía de un conjunto de datos utilizando la fórmula de entropía de Shannon.
+
+signal_handler(signal, frame)
+Esta función maneja la señal de interrupción y sale del programa de manera segura.
+
+Código principal:
+
+El código usa argparse para analizar los argumentos de línea de comandos y obtener la ruta a la zona crítica y la lista de extensiones de archivo (si se especifica).
+
+Verifica si el usuario que ejecuta el script es root. Si no lo es, sale del script con un mensaje de error.
+
+Verifica si la ruta proporcionada existe y es un directorio. Si no lo es, sale del script con un mensaje de error.
+
+Configura el manejador de señales para manejar la señal de interrupción (Ctrl+C).
+
+Monitorea continuamente la zona crítica utilizando un bucle infinito y verificando cambios en la entropía de los archivos, el uso del disco y la actividad criptográfica. Si se proporciona una lista de extensiones de archivo, solo verifica los archivos con esas extensiones.
+
+El script se duerme durante 60 segundos antes de verificar de nuevo.
+
+Registro de eventos:
+El script registra mensajes de advertencia en el archivo "/var/log/irondome/irondome.log" usando el módulo de registro. Si se detecta alguna actividad sospechosa, el script registrará un mensaje de advertencia con la información relevante.
