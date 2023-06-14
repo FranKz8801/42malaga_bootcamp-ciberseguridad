@@ -1,0 +1,33 @@
+Inquisitor
+Inquisitor es una herramienta de seguridad que permite realizar ataques de envenenamiento ARP y monitorear el tráfico en el puerto 21 (FTP). La herramienta utiliza la biblioteca Scapy de Python para construir y enviar paquetes ARP, y para analizar el tráfico de red.
+
+Requisitos
+Python 3.x
+Scapy
+ftplib
+Uso
+Para utilizar Inquisitor, debes proporcionar los siguientes argumentos:
+
+
+python inquisitor.py <IP-src> <MAC-src> <IP-target> <MAC-target>
+IP-src: dirección IP de la fuente
+MAC-src: dirección MAC de la fuente
+IP-target: dirección IP del objetivo
+MAC-target: dirección MAC del objetivo
+Una vez que Inquisitor se esté ejecutando, interceptará el tráfico en el puerto 21 (FTP) y mostrará en tiempo real los paquetes intercambiados. Además, realizará un ataque de envenenamiento ARP en ambos sentidos para interceptar todo el tráfico entre la fuente y el objetivo.
+
+Los nombres de usuario y contraseñas de FTP, así como los nombres de los archivos descargados, se mostrarán en la salida de registro.
+
+
+Docker ps -a
+Ver contenedores
+
+Entra a los docker
+docker exec -it 822 bash
+
+Ver tabla arp
+arp-scan 172.18.0.0/16
+
+Tcpdump
+
+python3 iinquisitor.py 172.18.0.2 02:42:ac:12:00:03 172.18.0.4 02:42:ac:12:00:03
