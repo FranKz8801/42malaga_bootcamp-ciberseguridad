@@ -1,27 +1,27 @@
-# startrek_payroll
+Vaccine.py
+Un analizador de vulnerabilidades de SQL injection
+Vaccine.py es una herramienta para analizar sitios web en busca de vulnerabilidades de inyección SQL. Realiza las siguientes acciones:
 
-A simple SQL injection vulnerable web application powered by Docker
+Analiza todas las formas HTML en una URL dada
+Intenta inyectar cadenas SQL maliciosas en cada campo de formulario
+Comprueba las respuestas en busca de errores indicativos de una vulnerabilidad de SQLi
+Informa de cualquier vulnerabilidad detectada e incluye el tipo (booleano, errores, UNION, etc.) y la carga útil que lo activó.
+Uso
+Copy
+python vaccine.py URL [-o LOGFILE] [-X REQUEST_METHOD] [-c COOKIE] [-u USER_AGENT]
+URL: La URL a analizar
+-o LOGFILE: Archivo de registro opcional para guardar los resultados
+-X REQUEST_METHOD: Método de solicitud opcional (GET o POST)
+-c COOKIE: Cookie de inicio de sesión opcional
+-u USER_AGENT: Agente de usuario opcional para falsificar
+Instalación
+Vaccine.py requiere las siguientes dependencias de Python:
 
-## Project Summary
+requests
+bs4 (BeautifulSoup4)
+argparse
+pprint
+colorama
+Puedes instalarlas usando pip:
 
-This is a simple web application that is vulnerable to SQL injection attacks. The web application is based on the `payroll_app` from the [Metasploitable3 project](https://github.com/rapid7/metasploitable3), and the PHP code is taken (almost) directly from that project. The primary contribution of this project is a Docker environment using docker-compose and consiting of Nginx, PHP and MySQL containers to run the web application easily.
-
-## Project Instructions
-
-Install the project requirements on your choice of operating system, including:
-
-- Docker
-- Docker Compose plugin
-
-Run using either of the following:
-
-- `docker compose up --build`
-- `make run`
-
-Open web browser and visit:
-
-- `localhost:8080`
-
-Clean the Docker environment (after making changes):
-
-- `make clean`
+pip install -r requirements.txt
