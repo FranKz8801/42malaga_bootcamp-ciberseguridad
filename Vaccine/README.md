@@ -7,7 +7,7 @@ Intenta inyectar cadenas SQL maliciosas en cada campo de formulario
 Comprueba las respuestas en busca de errores indicativos de una vulnerabilidad de SQLi
 Informa de cualquier vulnerabilidad detectada e incluye el tipo (booleano, errores, UNION, etc.) y la carga útil que lo activó.
 Uso
-Copy
+
 python vaccine.py URL [-o LOGFILE] [-X REQUEST_METHOD] [-c COOKIE] [-u USER_AGENT]
 URL: La URL a analizar
 -o LOGFILE: Archivo de registro opcional para guardar los resultados
